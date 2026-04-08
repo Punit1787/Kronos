@@ -1,0 +1,7 @@
+target/
+data/
+*.log
+.vscode/
+frontend/
+lombok.jar
+*.db
