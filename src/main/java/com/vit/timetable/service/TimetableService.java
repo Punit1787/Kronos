@@ -253,12 +253,15 @@ public class TimetableService {
             }
         }
 
+        // First class on a day can start at any period
         if (existingPeriods.isEmpty()) {
-            return slot.getPeriodNumber() == 1;
+            return true;
         }
 
+        // Subsequent classes must be consecutive (right after the last one, or right before the first)
         int maxPeriod = Collections.max(existingPeriods);
-        return slot.getPeriodNumber() == maxPeriod + 1;
+        int minPeriod = Collections.min(existingPeriods);
+        return slot.getPeriodNumber() == maxPeriod + 1 || slot.getPeriodNumber() == minPeriod - 1;
     }
 
     /**

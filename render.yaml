@@ -9,3 +9,5 @@ services:
     envVars:
       - key: PORT
         value: "8080"
+      - key: ADMIN_PASSWORD
+        sync: false

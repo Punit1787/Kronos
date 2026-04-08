@@ -937,12 +937,100 @@
     </div>
   </div>
 
+  <!-- ===== LOGIN MODAL ===== -->
+  <div id="login-overlay" style="display:none;position:fixed;inset:0;background:rgba(26,24,20,0.5);backdrop-filter:blur(4px);z-index:200;display:none;align-items:center;justify-content:center;">
+    <div style="background:var(--white);border-radius:16px;padding:40px;max-width:380px;width:90%;box-shadow:0 24px 48px rgba(0,0,0,0.15);animation:fadeIn 0.3s ease;">
+      <h2 style="font-family:'DM Serif Display',serif;font-size:24px;margin-bottom:8px;">Admin Login</h2>
+      <p style="font-size:14px;color:var(--ink-light);margin-bottom:24px;line-height:1.6;">Enter the admin password to manage data.</p>
+      <div class="form-group" style="margin-bottom:20px;">
+        <label>Password</label>
+        <input type="password" id="login-password" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <div id="login-error" style="display:none;color:var(--accent);font-size:13px;margin-bottom:16px;"></div>
+      <div style="display:flex;gap:12px;">
+        <button class="btn btn-primary" onclick="doLogin()" style="flex:1;">Login</button>
+        <button class="btn btn-outline" onclick="closeLogin()" style="flex:1;">Cancel</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const API = '/api';
     let selectedDivision = 'A';
+    let adminToken = sessionStorage.getItem('adminToken') || null;
+
+    // =========== AUTH HELPERS ===========
+    function authHeaders() {
+      const h = { 'Content-Type': 'application/json' };
+      if (adminToken) h['Authorization'] = 'Bearer ' + adminToken;
+      return h;
+    }
+
+    function showLoginModal(callback) {
+      document.getElementById('login-overlay').style.display = 'flex';
+      document.getElementById('login-password').value = '';
+      document.getElementById('login-error').style.display = 'none';
+      document.getElementById('login-password').focus();
+      window._loginCallback = callback;
+    }
+
+    function closeLogin() {
+      document.getElementById('login-overlay').style.display = 'none';
+      window._loginCallback = null;
+    }
+
+    async function doLogin() {
+      const pw = document.getElementById('login-password').value;
+      if (!pw) return;
+      try {
+        const res = await fetch(`${API}/auth/check`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pw })
+        });
+        const data = await res.json();
+        if (data.success) {
+          adminToken = data.token;
+          sessionStorage.setItem('adminToken', adminToken);
+          closeLogin();
+          if (window._loginCallback) window._loginCallback();
+        } else {
+          document.getElementById('login-error').textContent = 'Wrong password. Try again.';
+          document.getElementById('login-error').style.display = 'block';
+        }
+      } catch (e) {
+        document.getElementById('login-error').textContent = 'Connection error.';
+        document.getElementById('login-error').style.display = 'block';
+      }
+    }
+
+    function adminLogout() {
+      adminToken = null;
+      sessionStorage.removeItem('adminToken');
+      showPage('home', document.querySelectorAll('.nav-links a')[0]);
+    }
+
+    // Wrapper for mutating API calls — handles 401 by showing login
+    async function authFetch(url, options, retryCallback) {
+      const res = await fetch(url, options);
+      if (res.status === 401 || res.status === 403) {
+        // Token expired or missing — prompt login
+        adminToken = null;
+        sessionStorage.removeItem('adminToken');
+        showLoginModal(retryCallback);
+        return null;
+      }
+      return res;
+    }
 
     // =========== NAVIGATION ===========
     function showPage(id, linkEl) {
+      // Admin & Generate pages require login
+      if ((id === 'admin' || id === 'generate') && !adminToken) {
+        showLoginModal(() => showPage(id, linkEl));
+        return;
+      }
+
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
       document.getElementById('page-' + id).classList.add('active');
@@ -988,13 +1076,24 @@
 
     async function addSubject() {
       const body = {
-        name: document.getElementById('sub-name').value,
-        code: document.getElementById('sub-code').value,
+        name: document.getElementById('sub-name').value.trim(),
+        code: document.getElementById('sub-code').value.trim(),
         hoursPerWeek: parseInt(document.getElementById('sub-hours').value),
         lab: document.getElementById('sub-islab').checked
       };
       if (!body.name || !body.code) return alert('Fill in name and code');
-      await fetch(`${API}/subjects`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+
+      const res = await authFetch(`${API}/subjects`, {
+        method: 'POST', headers: authHeaders(), body: JSON.stringify(body)
+      }, () => addSubject());
+      if (!res) return;
+
+      const data = await res.json();
+      if (res.status === 400 && data.error) {
+        alert(data.error);
+        return;
+      }
+
       loadSubjectsTable();
       loadSubjectOptions();
       document.getElementById('sub-name').value = '';
@@ -1002,7 +1101,11 @@
     }
 
     async function deleteSubject(id) {
-      await fetch(`${API}/subjects/${id}`, { method: 'DELETE' });
+      if (!confirm('Remove this subject? Any timetable entries using it will also be deleted.')) return;
+      const res = await authFetch(`${API}/subjects/${id}`, {
+        method: 'DELETE', headers: authHeaders()
+      }, () => deleteSubject(id));
+      if (!res) return;
       loadSubjectsTable();
       loadSubjectOptions();
     }
@@ -1034,20 +1137,35 @@
       const selectedOpts = Array.from(document.getElementById('teacher-subjects').selectedOptions);
       const subjects = selectedOpts.map(o => ({ id: parseInt(o.value) }));
       const body = {
-        name: document.getElementById('teacher-name').value,
-        email: document.getElementById('teacher-email').value,
+        name: document.getElementById('teacher-name').value.trim(),
+        email: document.getElementById('teacher-email').value.trim(),
         maxHoursPerWeek: parseInt(document.getElementById('teacher-maxhrs').value),
         subjects
       };
       if (!body.name) return alert('Enter teacher name');
-      await fetch(`${API}/teachers`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+
+      const res = await authFetch(`${API}/teachers`, {
+        method: 'POST', headers: authHeaders(), body: JSON.stringify(body)
+      }, () => addTeacher());
+      if (!res) return;
+
+      const data = await res.json();
+      if (res.status === 400 && data.error) {
+        alert(data.error);
+        return;
+      }
+
       loadTeachersTable();
       document.getElementById('teacher-name').value = '';
       document.getElementById('teacher-email').value = '';
     }
 
     async function deleteTeacher(id) {
-      await fetch(`${API}/teachers/${id}`, { method: 'DELETE' });
+      if (!confirm('Remove this teacher? Any timetable entries using them will also be deleted.')) return;
+      const res = await authFetch(`${API}/teachers/${id}`, {
+        method: 'DELETE', headers: authHeaders()
+      }, () => deleteTeacher(id));
+      if (!res) return;
       loadTeachersTable();
     }
 
@@ -1069,18 +1187,33 @@
 
     async function addRoom() {
       const body = {
-        roomNumber: document.getElementById('room-num').value,
+        roomNumber: document.getElementById('room-num').value.trim(),
         capacity: parseInt(document.getElementById('room-cap').value),
         lab: document.getElementById('room-islab').checked
       };
       if (!body.roomNumber) return alert('Enter room number');
-      await fetch(`${API}/rooms`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+
+      const res = await authFetch(`${API}/rooms`, {
+        method: 'POST', headers: authHeaders(), body: JSON.stringify(body)
+      }, () => addRoom());
+      if (!res) return;
+
+      const data = await res.json();
+      if (res.status === 400 && data.error) {
+        alert(data.error);
+        return;
+      }
+
       loadRoomsTable();
       document.getElementById('room-num').value = '';
     }
 
     async function deleteRoom(id) {
-      await fetch(`${API}/rooms/${id}`, { method: 'DELETE' });
+      if (!confirm('Remove this room? Any timetable entries using it will also be deleted.')) return;
+      const res = await authFetch(`${API}/rooms/${id}`, {
+        method: 'DELETE', headers: authHeaders()
+      }, () => deleteRoom(id));
+      if (!res) return;
       loadRoomsTable();
     }
 
@@ -1099,7 +1232,11 @@
       status.style.display = 'none';
 
       try {
-        const res = await fetch(`${API}/timetable/generate?division=${selectedDivision}`, { method: 'POST' });
+        const res = await authFetch(`${API}/timetable/generate?division=${selectedDivision}`, {
+          method: 'POST', headers: authHeaders()
+        }, () => generateTimetable());
+        if (!res) { btn.innerHTML = 'Generate'; btn.disabled = false; return; }
+
         const data = await res.json();
         status.className = 'status-msg ' + (data.success ? 'success' : 'error');
         status.textContent = data.message;
@@ -1130,7 +1267,11 @@
 
     async function clearTimetable() {
       if (!confirm(`Clear timetable for Division ${selectedDivision}?`)) return;
-      await fetch(`${API}/timetable?division=${selectedDivision}`, { method: 'DELETE' });
+      const res = await authFetch(`${API}/timetable?division=${selectedDivision}`, {
+        method: 'DELETE', headers: authHeaders()
+      }, () => clearTimetable());
+      if (!res) return;
+
       const status = document.getElementById('gen-status');
       status.className = 'status-msg info';
       status.textContent = `Timetable cleared for Division ${selectedDivision}.`;
