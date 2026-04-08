@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VIT Timetable Generator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --bg: #F7F5F0;
@@ -49,9 +58,14 @@
       text-decoration: none;
     }
 
-    .nav-logo span { color: var(--accent); }
+    .nav-logo span {
+      color: var(--accent);
+    }
 
-    .nav-links { display: flex; gap: 0; }
+    .nav-links {
+      display: flex;
+      gap: 0;
+    }
 
     .nav-links a {
       font-size: 13px;
@@ -64,16 +78,33 @@
       letter-spacing: 0.2px;
     }
 
-    .nav-links a:hover, .nav-links a.active {
+    .nav-links a:hover,
+    .nav-links a.active {
       color: var(--ink);
       background: var(--accent-light);
     }
 
     /* PAGES */
-    .page { display: none; animation: fadeIn 0.3s ease; }
-    .page.active { display: block; }
+    .page {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
     /* HERO */
     .hero {
@@ -112,7 +143,12 @@
       margin-bottom: 40px;
     }
 
-    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
 
     .btn {
       display: inline-flex;
@@ -134,20 +170,32 @@
       background: var(--ink);
       color: var(--white);
     }
-    .btn-primary:hover { background: #2d2a26; transform: translateY(-1px); }
+
+    .btn-primary:hover {
+      background: #2d2a26;
+      transform: translateY(-1px);
+    }
 
     .btn-outline {
       background: transparent;
       color: var(--ink);
       border: 1px solid var(--border);
     }
-    .btn-outline:hover { border-color: var(--ink); background: var(--white); }
+
+    .btn-outline:hover {
+      border-color: var(--ink);
+      background: var(--white);
+    }
 
     .btn-danger {
       background: var(--accent);
       color: white;
     }
-    .btn-danger:hover { background: #b33d26; transform: translateY(-1px); }
+
+    .btn-danger:hover {
+      background: #b33d26;
+      transform: translateY(-1px);
+    }
 
     /* CARDS ROW */
     .cards-row {
@@ -225,8 +273,13 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .data-table tr:last-child td { border-bottom: none; }
-    .data-table tr:hover td { background: var(--accent-light); }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover td {
+      background: var(--accent-light);
+    }
 
     .badge {
       display: inline-flex;
@@ -238,8 +291,15 @@
       letter-spacing: 0.3px;
     }
 
-    .badge-lab { background: #E8F4F0; color: #2D7A5F; }
-    .badge-lecture { background: #EBF0F8; color: #3D5A8A; }
+    .badge-lab {
+      background: #E8F4F0;
+      color: #2D7A5F;
+    }
+
+    .badge-lecture {
+      background: #EBF0F8;
+      color: #3D5A8A;
+    }
 
     /* FORM */
     .form-card {
@@ -258,10 +318,22 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-    .form-row.three { grid-template-columns: 1fr 1fr 1fr; }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
 
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-row.three {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
 
     label {
       font-size: 12px;
@@ -271,7 +343,8 @@
       color: var(--ink-light);
     }
 
-    input, select {
+    input,
+    select {
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -283,7 +356,10 @@
       transition: border-color 0.2s;
     }
 
-    input:focus, select:focus { border-color: var(--ink); }
+    input:focus,
+    select:focus {
+      border-color: var(--ink);
+    }
 
     .checkbox-group {
       display: flex;
@@ -292,7 +368,11 @@
       margin-top: 4px;
     }
 
-    input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
 
     /* GENERATE PAGE */
     .generate-wrap {
@@ -346,7 +426,10 @@
       color: var(--white);
     }
 
-    .gen-actions { display: flex; gap: 12px; }
+    .gen-actions {
+      display: flex;
+      gap: 12px;
+    }
 
     .status-msg {
       margin-top: 20px;
@@ -356,12 +439,28 @@
       display: none;
     }
 
-    .status-msg.success { background: #E8F4F0; color: #1D5C44; border: 1px solid #B8DDD3; }
-    .status-msg.error { background: #FBE8E4; color: #7A2D1A; border: 1px solid #E8BDB5; }
-    .status-msg.info { background: var(--accent-light); color: #7A3520; border: 1px solid #DFC8C0; }
+    .status-msg.success {
+      background: #E8F4F0;
+      color: #1D5C44;
+      border: 1px solid #B8DDD3;
+    }
+
+    .status-msg.error {
+      background: #FBE8E4;
+      color: #7A2D1A;
+      border: 1px solid #E8BDB5;
+    }
+
+    .status-msg.info {
+      background: var(--accent-light);
+      color: #7A3520;
+      border: 1px solid #DFC8C0;
+    }
 
     /* TIMETABLE VIEW */
-    .tt-wrap { padding: 48px; }
+    .tt-wrap {
+      padding: 48px;
+    }
 
     .tt-header {
       display: flex;
@@ -375,7 +474,11 @@
       font-size: 28px;
     }
 
-    .tt-controls { display: flex; gap: 10px; align-items: center; }
+    .tt-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
 
     .tt-grid {
       background: var(--white);
@@ -390,7 +493,9 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .tt-day:last-child { border-bottom: none; }
+    .tt-day:last-child {
+      border-bottom: none;
+    }
 
     .tt-day-label {
       padding: 20px 16px;
@@ -428,11 +533,21 @@
     }
 
     @keyframes slotIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
-    .tt-slot:hover { transform: translateY(-2px); border-color: var(--ink-light); }
+    .tt-slot:hover {
+      transform: translateY(-2px);
+      border-color: var(--ink-light);
+    }
 
     .tt-slot.lab-slot {
       background: #F0F8F5;
@@ -494,13 +609,17 @@
       display: inline-block;
       width: 14px;
       height: 14px;
-      border: 2px solid rgba(255,255,255,0.3);
+      border: 2px solid rgba(255, 255, 255, 0.3);
       border-top-color: white;
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
     .delete-btn {
       background: none;
@@ -513,298 +632,349 @@
       transition: color 0.2s, background 0.2s;
     }
 
-    .delete-btn:hover { color: var(--accent); background: var(--accent-light); }
+    .delete-btn:hover {
+      color: var(--accent);
+      background: var(--accent-light);
+    }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      nav { padding: 0 20px; }
-      .hero, .section, .generate-wrap, .tt-wrap { padding: 40px 20px; }
-      .cards-row { grid-template-columns: 1fr; }
-      .form-row, .form-row.three { grid-template-columns: 1fr; }
-      .tt-day { grid-template-columns: 60px 1fr; }
+      nav {
+        padding: 0 20px;
+      }
+
+      .hero,
+      .section,
+      .generate-wrap,
+      .tt-wrap {
+        padding: 40px 20px;
+      }
+
+      .cards-row {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row,
+      .form-row.three {
+        grid-template-columns: 1fr;
+      }
+
+      .tt-day {
+        grid-template-columns: 60px 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<nav>
-  <a class="nav-logo" href="#"><span>VIT</span> Timetable</a>
-  <div class="nav-links">
-    <a href="#" class="active" onclick="showPage('home', this)">Home</a>
-    <a href="#" onclick="showPage('admin', this)">Admin</a>
-    <a href="#" onclick="showPage('generate', this)">Generate</a>
-    <a href="#" onclick="showPage('view', this)">View</a>
-  </div>
-</nav>
-
-<!-- ===== HOME PAGE ===== -->
-<div id="page-home" class="page active">
-  <div class="hero">
-    <p class="hero-label">Vidyalankar Institute of Technology</p>
-    <h1>Smart <em>Timetable</em><br>Generator</h1>
-    <p>Automatically builds conflict-free class schedules with guaranteed lunch breaks and zero gaps between lectures — powered by backtracking algorithms.</p>
-    <div class="hero-actions">
-      <button class="btn btn-primary" onclick="showPage('generate', document.querySelectorAll('.nav-links a')[2])">
-        Generate Schedule
-      </button>
-      <button class="btn btn-outline" onclick="showPage('admin', document.querySelectorAll('.nav-links a')[1])">
-        Manage Data
-      </button>
+  <nav>
+    <a class="nav-logo" href="#"><span>VIT</span> Timetable</a>
+    <div class="nav-links">
+      <a href="#" class="active" onclick="showPage('home', this)">Home</a>
+      <a href="#" onclick="showPage('admin', this)">Admin</a>
+      <a href="#" onclick="showPage('generate', this)">Generate</a>
+      <a href="#" onclick="showPage('view', this)">View</a>
     </div>
-  </div>
+  </nav>
 
-  <div class="cards-row">
-    <div class="stat-card">
-      <div class="num" id="stat-subjects">—</div>
-      <div class="label">Subjects configured</div>
-    </div>
-    <div class="stat-card">
-      <div class="num" id="stat-teachers">—</div>
-      <div class="label">Faculty members</div>
-    </div>
-    <div class="stat-card">
-      <div class="num" id="stat-rooms">—</div>
-      <div class="label">Rooms & labs</div>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2 class="section-title">How it works</h2>
-    <p class="section-sub">Three steps to a complete, conflict-free timetable.</p>
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Step</th>
-          <th>Action</th>
-          <th>Details</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>01</strong></td>
-          <td>Configure data</td>
-          <td style="color:var(--ink-light)">Add teachers, subjects, rooms via the Admin panel</td>
-        </tr>
-        <tr>
-          <td><strong>02</strong></td>
-          <td>Generate</td>
-          <td style="color:var(--ink-light)">Pick a division — the algorithm runs and finds a valid schedule</td>
-        </tr>
-        <tr>
-          <td><strong>03</strong></td>
-          <td>View & share</td>
-          <td style="color:var(--ink-light)">See the full week grid with time, room, and faculty for each slot</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ===== ADMIN PAGE ===== -->
-<div id="page-admin" class="page">
-  <div class="section" style="max-width:100%">
-    <h2 class="section-title">Admin Panel</h2>
-    <p class="section-sub">Add or remove subjects, teachers, and rooms. Changes reflect immediately in the generator.</p>
-
-    <!-- ADD SUBJECT -->
-    <div class="form-card">
-      <h3>Add Subject</h3>
-      <div class="form-row three">
-        <div class="form-group">
-          <label>Subject Name</label>
-          <input type="text" id="sub-name" placeholder="e.g. Data Structures">
-        </div>
-        <div class="form-group">
-          <label>Code</label>
-          <input type="text" id="sub-code" placeholder="e.g. DSA">
-        </div>
-        <div class="form-group">
-          <label>Lectures / Week</label>
-          <input type="number" id="sub-hours" value="3" min="1" max="8">
-        </div>
+  <!-- ===== HOME PAGE ===== -->
+  <div id="page-home" class="page active">
+    <div class="hero">
+      <p class="hero-label">Vidyalankar Institute of Technology</p>
+      <h1>Smart <em>Timetable</em><br>Generator</h1>
+      <p>Automatically builds conflict-free class schedules with guaranteed lunch breaks and zero gaps between lectures
+        — powered by backtracking algorithms.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="showPage('generate', document.querySelectorAll('.nav-links a')[2])">
+          Generate Schedule
+        </button>
+        <button class="btn btn-outline" onclick="showPage('admin', document.querySelectorAll('.nav-links a')[1])">
+          Manage Data
+        </button>
       </div>
-      <div class="checkbox-group" style="margin-bottom:20px">
-        <input type="checkbox" id="sub-islab">
-        <label for="sub-islab" style="text-transform:none;font-size:14px;letter-spacing:0">This is a lab session (2hr block)</label>
-      </div>
-      <button class="btn btn-primary" onclick="addSubject()">Add Subject</button>
     </div>
 
-    <!-- SUBJECTS TABLE -->
-    <div style="margin-bottom:40px">
-      <table class="data-table" id="subjects-table">
-        <thead><tr><th>Name</th><th>Code</th><th>Hrs/Week</th><th>Type</th><th></th></tr></thead>
-        <tbody id="subjects-tbody"></tbody>
+    <div class="cards-row">
+      <div class="stat-card">
+        <div class="num" id="stat-subjects">—</div>
+        <div class="label">Subjects configured</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="stat-teachers">—</div>
+        <div class="label">Faculty members</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="stat-rooms">—</div>
+        <div class="label">Rooms & labs</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">How it works</h2>
+      <p class="section-sub">Three steps to a complete, conflict-free timetable.</p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Step</th>
+            <th>Action</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>01</strong></td>
+            <td>Configure data</td>
+            <td style="color:var(--ink-light)">Add teachers, subjects, rooms via the Admin panel</td>
+          </tr>
+          <tr>
+            <td><strong>02</strong></td>
+            <td>Generate</td>
+            <td style="color:var(--ink-light)">Pick a division — the algorithm runs and finds a valid schedule</td>
+          </tr>
+          <tr>
+            <td><strong>03</strong></td>
+            <td>View & share</td>
+            <td style="color:var(--ink-light)">See the full week grid with time, room, and faculty for each slot</td>
+          </tr>
+        </tbody>
       </table>
     </div>
+  </div>
 
-    <!-- ADD TEACHER -->
-    <div class="form-card">
-      <h3>Add Teacher</h3>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" id="teacher-name" placeholder="e.g. Prof. A. Sharma">
+  <!-- ===== ADMIN PAGE ===== -->
+  <div id="page-admin" class="page">
+    <div class="section" style="max-width:100%">
+      <h2 class="section-title">Admin Panel</h2>
+      <p class="section-sub">Add or remove subjects, teachers, and rooms. Changes reflect immediately in the generator.
+      </p>
+
+      <!-- ADD SUBJECT -->
+      <div class="form-card">
+        <h3>Add Subject</h3>
+        <div class="form-row three">
+          <div class="form-group">
+            <label>Subject Name</label>
+            <input type="text" id="sub-name" placeholder="e.g. Data Structures">
+          </div>
+          <div class="form-group">
+            <label>Code</label>
+            <input type="text" id="sub-code" placeholder="e.g. DSA">
+          </div>
+          <div class="form-group">
+            <label>Lectures / Week</label>
+            <input type="number" id="sub-hours" value="3" min="1" max="8">
+          </div>
         </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="teacher-email" placeholder="email@vit.edu">
+        <div class="checkbox-group" style="margin-bottom:20px">
+          <input type="checkbox" id="sub-islab">
+          <label for="sub-islab" style="text-transform:none;font-size:14px;letter-spacing:0">This is a lab session (2hr
+            block)</label>
         </div>
+        <button class="btn btn-primary" onclick="addSubject()">Add Subject</button>
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Max Hours / Week</label>
-          <input type="number" id="teacher-maxhrs" value="18" min="1" max="40">
+
+      <!-- SUBJECTS TABLE -->
+      <div style="margin-bottom:40px">
+        <table class="data-table" id="subjects-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Code</th>
+              <th>Hrs/Week</th>
+              <th>Type</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="subjects-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- ADD TEACHER -->
+      <div class="form-card">
+        <h3>Add Teacher</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="teacher-name" placeholder="e.g. Prof. A. Sharma">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="teacher-email" placeholder="email@vit.edu">
+          </div>
         </div>
-        <div class="form-group">
-          <label>Teaches (select subjects)</label>
-          <select id="teacher-subjects" multiple style="height:80px">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Max Hours / Week</label>
+            <input type="number" id="teacher-maxhrs" value="18" min="1" max="40">
+          </div>
+          <div class="form-group">
+            <label>Teaches (select subjects)</label>
+            <select id="teacher-subjects" multiple style="height:80px">
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="addTeacher()" style="margin-top:8px">Add Teacher</button>
+      </div>
+
+      <!-- TEACHERS TABLE -->
+      <div style="margin-bottom:40px">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Max Hrs</th>
+              <th>Subjects</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="teachers-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- ADD ROOM -->
+      <div class="form-card">
+        <h3>Add Room</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Room Number</label>
+            <input type="text" id="room-num" placeholder="e.g. 304">
+          </div>
+          <div class="form-group">
+            <label>Capacity</label>
+            <input type="number" id="room-cap" value="60" min="1">
+          </div>
+        </div>
+        <div class="checkbox-group" style="margin-bottom:20px">
+          <input type="checkbox" id="room-islab">
+          <label for="room-islab" style="text-transform:none;font-size:14px;letter-spacing:0">This is a lab room</label>
+        </div>
+        <button class="btn btn-primary" onclick="addRoom()">Add Room</button>
+      </div>
+
+      <!-- ROOMS TABLE -->
+      <div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Room</th>
+              <th>Capacity</th>
+              <th>Type</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="rooms-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== GENERATE PAGE ===== -->
+  <div id="page-generate" class="page">
+    <div class="generate-wrap">
+      <div class="gen-card">
+        <h2>Generate Timetable</h2>
+        <p>Select a division and run the backtracking algorithm. It will find a conflict-free schedule with no gaps and
+          a protected lunch break.</p>
+
+        <div class="div-select-group" id="div-buttons">
+          <button class="div-btn selected" onclick="selectDiv(this, 'A')">A</button>
+          <button class="div-btn" onclick="selectDiv(this, 'B')">B</button>
+          <button class="div-btn" onclick="selectDiv(this, 'C')">C</button>
+        </div>
+
+        <div class="gen-actions">
+          <button class="btn btn-primary" onclick="generateTimetable()" id="gen-btn">
+            Generate
+          </button>
+          <button class="btn btn-outline" onclick="clearAndView()">
+            View Existing
+          </button>
+          <button class="btn btn-danger" onclick="clearTimetable()">
+            Clear
+          </button>
+        </div>
+
+        <div class="status-msg" id="gen-status"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VIEW PAGE ===== -->
+  <div id="page-view" class="page">
+    <div class="tt-wrap">
+      <div class="tt-header">
+        <div>
+          <h2>Weekly Schedule</h2>
+          <p style="font-size:14px;color:var(--ink-light);margin-top:4px" id="tt-division-label">Select a division to
+            view</p>
+        </div>
+        <div class="tt-controls">
+          <select id="view-division" onchange="loadTimetable()" style="min-width:120px">
+            <option value="">— Division —</option>
+            <option value="A">Division A</option>
+            <option value="B">Division B</option>
+            <option value="C">Division C</option>
           </select>
         </div>
       </div>
-      <button class="btn btn-primary" onclick="addTeacher()" style="margin-top:8px">Add Teacher</button>
-    </div>
 
-    <!-- TEACHERS TABLE -->
-    <div style="margin-bottom:40px">
-      <table class="data-table">
-        <thead><tr><th>Name</th><th>Email</th><th>Max Hrs</th><th>Subjects</th><th></th></tr></thead>
-        <tbody id="teachers-tbody"></tbody>
-      </table>
-    </div>
+      <!-- Lunch info banner -->
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:13px;color:var(--ink-light)">
+        <span style="display:inline-block;width:8px;height:8px;background:#D4C8A0;border-radius:50%"></span>
+        Lunch break 1:00 PM – 2:00 PM is protected and never scheduled.
+        <span
+          style="margin-left:8px;display:inline-block;width:8px;height:8px;background:#B8DDD3;border-radius:50%"></span>
+        Green cards = Lab sessions.
+      </div>
 
-    <!-- ADD ROOM -->
-    <div class="form-card">
-      <h3>Add Room</h3>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Room Number</label>
-          <input type="text" id="room-num" placeholder="e.g. 304">
-        </div>
-        <div class="form-group">
-          <label>Capacity</label>
-          <input type="number" id="room-cap" value="60" min="1">
+      <div id="timetable-grid">
+        <div style="padding:48px;text-align:center;color:var(--ink-light);font-size:14px">
+          Select a division above to view its timetable.
         </div>
       </div>
-      <div class="checkbox-group" style="margin-bottom:20px">
-        <input type="checkbox" id="room-islab">
-        <label for="room-islab" style="text-transform:none;font-size:14px;letter-spacing:0">This is a lab room</label>
-      </div>
-      <button class="btn btn-primary" onclick="addRoom()">Add Room</button>
-    </div>
-
-    <!-- ROOMS TABLE -->
-    <div>
-      <table class="data-table">
-        <thead><tr><th>Room</th><th>Capacity</th><th>Type</th><th></th></tr></thead>
-        <tbody id="rooms-tbody"></tbody>
-      </table>
     </div>
   </div>
-</div>
 
-<!-- ===== GENERATE PAGE ===== -->
-<div id="page-generate" class="page">
-  <div class="generate-wrap">
-    <div class="gen-card">
-      <h2>Generate Timetable</h2>
-      <p>Select a division and run the backtracking algorithm. It will find a conflict-free schedule with no gaps and a protected lunch break.</p>
+  <script>
+    const API = '/api';
+    let selectedDivision = 'A';
 
-      <div class="div-select-group" id="div-buttons">
-        <button class="div-btn selected" onclick="selectDiv(this, 'A')">A</button>
-        <button class="div-btn" onclick="selectDiv(this, 'B')">B</button>
-        <button class="div-btn" onclick="selectDiv(this, 'C')">C</button>
-      </div>
+    // =========== NAVIGATION ===========
+    function showPage(id, linkEl) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      document.getElementById('page-' + id).classList.add('active');
+      if (linkEl) linkEl.classList.add('active');
 
-      <div class="gen-actions">
-        <button class="btn btn-primary" onclick="generateTimetable()" id="gen-btn">
-          Generate
-        </button>
-        <button class="btn btn-outline" onclick="clearAndView()">
-          View Existing
-        </button>
-        <button class="btn btn-danger" onclick="clearTimetable()">
-          Clear
-        </button>
-      </div>
-
-      <div class="status-msg" id="gen-status"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== VIEW PAGE ===== -->
-<div id="page-view" class="page">
-  <div class="tt-wrap">
-    <div class="tt-header">
-      <div>
-        <h2>Weekly Schedule</h2>
-        <p style="font-size:14px;color:var(--ink-light);margin-top:4px" id="tt-division-label">Select a division to view</p>
-      </div>
-      <div class="tt-controls">
-        <select id="view-division" onchange="loadTimetable()" style="min-width:120px">
-          <option value="">— Division —</option>
-          <option value="A">Division A</option>
-          <option value="B">Division B</option>
-          <option value="C">Division C</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- Lunch info banner -->
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:13px;color:var(--ink-light)">
-      <span style="display:inline-block;width:8px;height:8px;background:#D4C8A0;border-radius:50%"></span>
-      Lunch break 1:00 PM – 2:00 PM is protected and never scheduled.
-      <span style="margin-left:8px;display:inline-block;width:8px;height:8px;background:#B8DDD3;border-radius:50%"></span>
-      Green cards = Lab sessions.
-    </div>
-
-    <div id="timetable-grid">
-      <div style="padding:48px;text-align:center;color:var(--ink-light);font-size:14px">
-        Select a division above to view its timetable.
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  const API = 'http://localhost:8080/api';
-  let selectedDivision = 'A';
-
-  // =========== NAVIGATION ===========
-  function showPage(id, linkEl) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-    document.getElementById('page-' + id).classList.add('active');
-    if (linkEl) linkEl.classList.add('active');
-
-    if (id === 'home') loadStats();
-    if (id === 'admin') { loadSubjectsTable(); loadTeachersTable(); loadRoomsTable(); loadSubjectOptions(); }
-    if (id === 'view' && document.getElementById('view-division').value) loadTimetable();
-  }
-
-  // =========== STATS ===========
-  async function loadStats() {
-    try {
-      const [subjects, teachers, rooms] = await Promise.all([
-        fetch(`${API}/subjects`).then(r => r.json()),
-        fetch(`${API}/teachers`).then(r => r.json()),
-        fetch(`${API}/rooms`).then(r => r.json())
-      ]);
-      document.getElementById('stat-subjects').textContent = subjects.length;
-      document.getElementById('stat-teachers').textContent = teachers.length;
-      document.getElementById('stat-rooms').textContent = rooms.length;
-    } catch(e) {
-      console.error('Stats load failed', e);
+      if (id === 'home') loadStats();
+      if (id === 'admin') { loadSubjectsTable(); loadTeachersTable(); loadRoomsTable(); loadSubjectOptions(); }
+      if (id === 'view' && document.getElementById('view-division').value) loadTimetable();
     }
-  }
 
-  // =========== SUBJECTS ===========
-  async function loadSubjectsTable() {
-    const tbody = document.getElementById('subjects-tbody');
-    try {
-      const subjects = await fetch(`${API}/subjects`).then(r => r.json());
-      tbody.innerHTML = subjects.map(s => `
+    // =========== STATS ===========
+    async function loadStats() {
+      try {
+        const [subjects, teachers, rooms] = await Promise.all([
+          fetch(`${API}/subjects`).then(r => r.json()),
+          fetch(`${API}/teachers`).then(r => r.json()),
+          fetch(`${API}/rooms`).then(r => r.json())
+        ]);
+        document.getElementById('stat-subjects').textContent = subjects.length;
+        document.getElementById('stat-teachers').textContent = teachers.length;
+        document.getElementById('stat-rooms').textContent = rooms.length;
+      } catch (e) {
+        console.error('Stats load failed', e);
+      }
+    }
+
+    // =========== SUBJECTS ===========
+    async function loadSubjectsTable() {
+      const tbody = document.getElementById('subjects-tbody');
+      try {
+        const subjects = await fetch(`${API}/subjects`).then(r => r.json());
+        tbody.innerHTML = subjects.map(s => `
         <tr>
           <td>${s.name}</td>
           <td style="color:var(--ink-light)">${s.code}</td>
@@ -813,42 +983,42 @@
           <td><button class="delete-btn" onclick="deleteSubject(${s.id})">Remove</button></td>
         </tr>
       `).join('') || '<tr><td colspan="5" style="color:var(--ink-light);text-align:center;padding:24px">No subjects yet</td></tr>';
-    } catch(e) { tbody.innerHTML = '<tr><td colspan="5">Failed to load</td></tr>'; }
-  }
+      } catch (e) { tbody.innerHTML = '<tr><td colspan="5">Failed to load</td></tr>'; }
+    }
 
-  async function addSubject() {
-    const body = {
-      name: document.getElementById('sub-name').value,
-      code: document.getElementById('sub-code').value,
-      hoursPerWeek: parseInt(document.getElementById('sub-hours').value),
-      lab: document.getElementById('sub-islab').checked
-    };
-    if (!body.name || !body.code) return alert('Fill in name and code');
-    await fetch(`${API}/subjects`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
-    loadSubjectsTable();
-    loadSubjectOptions();
-    document.getElementById('sub-name').value = '';
-    document.getElementById('sub-code').value = '';
-  }
+    async function addSubject() {
+      const body = {
+        name: document.getElementById('sub-name').value,
+        code: document.getElementById('sub-code').value,
+        hoursPerWeek: parseInt(document.getElementById('sub-hours').value),
+        lab: document.getElementById('sub-islab').checked
+      };
+      if (!body.name || !body.code) return alert('Fill in name and code');
+      await fetch(`${API}/subjects`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      loadSubjectsTable();
+      loadSubjectOptions();
+      document.getElementById('sub-name').value = '';
+      document.getElementById('sub-code').value = '';
+    }
 
-  async function deleteSubject(id) {
-    await fetch(`${API}/subjects/${id}`, { method: 'DELETE' });
-    loadSubjectsTable();
-    loadSubjectOptions();
-  }
+    async function deleteSubject(id) {
+      await fetch(`${API}/subjects/${id}`, { method: 'DELETE' });
+      loadSubjectsTable();
+      loadSubjectOptions();
+    }
 
-  async function loadSubjectOptions() {
-    const subjects = await fetch(`${API}/subjects`).then(r => r.json());
-    const sel = document.getElementById('teacher-subjects');
-    sel.innerHTML = subjects.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
-  }
+    async function loadSubjectOptions() {
+      const subjects = await fetch(`${API}/subjects`).then(r => r.json());
+      const sel = document.getElementById('teacher-subjects');
+      sel.innerHTML = subjects.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+    }
 
-  // =========== TEACHERS ===========
-  async function loadTeachersTable() {
-    const tbody = document.getElementById('teachers-tbody');
-    try {
-      const teachers = await fetch(`${API}/teachers`).then(r => r.json());
-      tbody.innerHTML = teachers.map(t => `
+    // =========== TEACHERS ===========
+    async function loadTeachersTable() {
+      const tbody = document.getElementById('teachers-tbody');
+      try {
+        const teachers = await fetch(`${API}/teachers`).then(r => r.json());
+        tbody.innerHTML = teachers.map(t => `
         <tr>
           <td>${t.name}</td>
           <td style="color:var(--ink-light)">${t.email || '—'}</td>
@@ -857,36 +1027,36 @@
           <td><button class="delete-btn" onclick="deleteTeacher(${t.id})">Remove</button></td>
         </tr>
       `).join('') || '<tr><td colspan="5" style="color:var(--ink-light);text-align:center;padding:24px">No teachers yet</td></tr>';
-    } catch(e) { tbody.innerHTML = '<tr><td colspan="5">Failed to load</td></tr>'; }
-  }
+      } catch (e) { tbody.innerHTML = '<tr><td colspan="5">Failed to load</td></tr>'; }
+    }
 
-  async function addTeacher() {
-    const selectedOpts = Array.from(document.getElementById('teacher-subjects').selectedOptions);
-    const subjects = selectedOpts.map(o => ({ id: parseInt(o.value) }));
-    const body = {
-      name: document.getElementById('teacher-name').value,
-      email: document.getElementById('teacher-email').value,
-      maxHoursPerWeek: parseInt(document.getElementById('teacher-maxhrs').value),
-      subjects
-    };
-    if (!body.name) return alert('Enter teacher name');
-    await fetch(`${API}/teachers`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
-    loadTeachersTable();
-    document.getElementById('teacher-name').value = '';
-    document.getElementById('teacher-email').value = '';
-  }
+    async function addTeacher() {
+      const selectedOpts = Array.from(document.getElementById('teacher-subjects').selectedOptions);
+      const subjects = selectedOpts.map(o => ({ id: parseInt(o.value) }));
+      const body = {
+        name: document.getElementById('teacher-name').value,
+        email: document.getElementById('teacher-email').value,
+        maxHoursPerWeek: parseInt(document.getElementById('teacher-maxhrs').value),
+        subjects
+      };
+      if (!body.name) return alert('Enter teacher name');
+      await fetch(`${API}/teachers`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      loadTeachersTable();
+      document.getElementById('teacher-name').value = '';
+      document.getElementById('teacher-email').value = '';
+    }
 
-  async function deleteTeacher(id) {
-    await fetch(`${API}/teachers/${id}`, { method: 'DELETE' });
-    loadTeachersTable();
-  }
+    async function deleteTeacher(id) {
+      await fetch(`${API}/teachers/${id}`, { method: 'DELETE' });
+      loadTeachersTable();
+    }
 
-  // =========== ROOMS ===========
-  async function loadRoomsTable() {
-    const tbody = document.getElementById('rooms-tbody');
-    try {
-      const rooms = await fetch(`${API}/rooms`).then(r => r.json());
-      tbody.innerHTML = rooms.map(r => `
+    // =========== ROOMS ===========
+    async function loadRoomsTable() {
+      const tbody = document.getElementById('rooms-tbody');
+      try {
+        const rooms = await fetch(`${API}/rooms`).then(r => r.json());
+        tbody.innerHTML = rooms.map(r => `
         <tr>
           <td>${r.roomNumber}</td>
           <td>${r.capacity}</td>
@@ -894,135 +1064,135 @@
           <td><button class="delete-btn" onclick="deleteRoom(${r.id})">Remove</button></td>
         </tr>
       `).join('') || '<tr><td colspan="4" style="color:var(--ink-light);text-align:center;padding:24px">No rooms yet</td></tr>';
-    } catch(e) { tbody.innerHTML = '<tr><td colspan="4">Failed to load</td></tr>'; }
-  }
+      } catch (e) { tbody.innerHTML = '<tr><td colspan="4">Failed to load</td></tr>'; }
+    }
 
-  async function addRoom() {
-    const body = {
-      roomNumber: document.getElementById('room-num').value,
-      capacity: parseInt(document.getElementById('room-cap').value),
-      lab: document.getElementById('room-islab').checked
-    };
-    if (!body.roomNumber) return alert('Enter room number');
-    await fetch(`${API}/rooms`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
-    loadRoomsTable();
-    document.getElementById('room-num').value = '';
-  }
+    async function addRoom() {
+      const body = {
+        roomNumber: document.getElementById('room-num').value,
+        capacity: parseInt(document.getElementById('room-cap').value),
+        lab: document.getElementById('room-islab').checked
+      };
+      if (!body.roomNumber) return alert('Enter room number');
+      await fetch(`${API}/rooms`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      loadRoomsTable();
+      document.getElementById('room-num').value = '';
+    }
 
-  async function deleteRoom(id) {
-    await fetch(`${API}/rooms/${id}`, { method: 'DELETE' });
-    loadRoomsTable();
-  }
+    async function deleteRoom(id) {
+      await fetch(`${API}/rooms/${id}`, { method: 'DELETE' });
+      loadRoomsTable();
+    }
 
-  // =========== GENERATE ===========
-  function selectDiv(btn, div) {
-    document.querySelectorAll('.div-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    selectedDivision = div;
-  }
+    // =========== GENERATE ===========
+    function selectDiv(btn, div) {
+      document.querySelectorAll('.div-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedDivision = div;
+    }
 
-  async function generateTimetable() {
-    const btn = document.getElementById('gen-btn');
-    const status = document.getElementById('gen-status');
-    btn.innerHTML = '<span class="loader"></span> Generating...';
-    btn.disabled = true;
-    status.style.display = 'none';
+    async function generateTimetable() {
+      const btn = document.getElementById('gen-btn');
+      const status = document.getElementById('gen-status');
+      btn.innerHTML = '<span class="loader"></span> Generating...';
+      btn.disabled = true;
+      status.style.display = 'none';
 
-    try {
-      const res = await fetch(`${API}/timetable/generate?division=${selectedDivision}`, { method: 'POST' });
-      const data = await res.json();
-      status.className = 'status-msg ' + (data.success ? 'success' : 'error');
-      status.textContent = data.message;
-      status.style.display = 'block';
+      try {
+        const res = await fetch(`${API}/timetable/generate?division=${selectedDivision}`, { method: 'POST' });
+        const data = await res.json();
+        status.className = 'status-msg ' + (data.success ? 'success' : 'error');
+        status.textContent = data.message;
+        status.style.display = 'block';
 
-      if (data.success) {
-        setTimeout(() => {
-          document.getElementById('view-division').value = selectedDivision;
-          showPage('view', document.querySelectorAll('.nav-links a')[3]);
-          loadTimetable();
-        }, 1000);
+        if (data.success) {
+          setTimeout(() => {
+            document.getElementById('view-division').value = selectedDivision;
+            showPage('view', document.querySelectorAll('.nav-links a')[3]);
+            loadTimetable();
+          }, 1000);
+        }
+      } catch (e) {
+        status.className = 'status-msg error';
+        status.textContent = 'Failed to generate timetable. Please try again.';
+        status.style.display = 'block';
       }
-    } catch(e) {
-      status.className = 'status-msg error';
-      status.textContent = 'Failed to connect to backend. Make sure Spring Boot is running on port 8080.';
+
+      btn.innerHTML = 'Generate';
+      btn.disabled = false;
+    }
+
+    function clearAndView() {
+      document.getElementById('view-division').value = selectedDivision;
+      showPage('view', document.querySelectorAll('.nav-links a')[3]);
+      loadTimetable();
+    }
+
+    async function clearTimetable() {
+      if (!confirm(`Clear timetable for Division ${selectedDivision}?`)) return;
+      await fetch(`${API}/timetable?division=${selectedDivision}`, { method: 'DELETE' });
+      const status = document.getElementById('gen-status');
+      status.className = 'status-msg info';
+      status.textContent = `Timetable cleared for Division ${selectedDivision}.`;
       status.style.display = 'block';
     }
 
-    btn.innerHTML = 'Generate';
-    btn.disabled = false;
-  }
+    // =========== TIMETABLE VIEW ===========
+    async function loadTimetable() {
+      const division = document.getElementById('view-division').value;
+      if (!division) return;
 
-  function clearAndView() {
-    document.getElementById('view-division').value = selectedDivision;
-    showPage('view', document.querySelectorAll('.nav-links a')[3]);
-    loadTimetable();
-  }
+      document.getElementById('tt-division-label').textContent = `Division ${division} — Weekly Schedule`;
+      const grid = document.getElementById('timetable-grid');
+      grid.innerHTML = '<div style="padding:32px;text-align:center;color:var(--ink-light)">Loading...</div>';
 
-  async function clearTimetable() {
-    if (!confirm(`Clear timetable for Division ${selectedDivision}?`)) return;
-    await fetch(`${API}/timetable?division=${selectedDivision}`, { method: 'DELETE' });
-    const status = document.getElementById('gen-status');
-    status.className = 'status-msg info';
-    status.textContent = `Timetable cleared for Division ${selectedDivision}.`;
-    status.style.display = 'block';
-  }
+      try {
+        const data = await fetch(`${API}/timetable?division=${division}`).then(r => r.json());
+        const tt = data.timetable;
+        const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+        const dayLabels = { MONDAY: 'Mon', TUESDAY: 'Tue', WEDNESDAY: 'Wed', THURSDAY: 'Thu', FRIDAY: 'Fri', SATURDAY: 'Sat' };
 
-  // =========== TIMETABLE VIEW ===========
-  async function loadTimetable() {
-    const division = document.getElementById('view-division').value;
-    if (!division) return;
-
-    document.getElementById('tt-division-label').textContent = `Division ${division} — Weekly Schedule`;
-    const grid = document.getElementById('timetable-grid');
-    grid.innerHTML = '<div style="padding:32px;text-align:center;color:var(--ink-light)">Loading...</div>';
-
-    try {
-      const data = await fetch(`${API}/timetable?division=${division}`).then(r => r.json());
-      const tt = data.timetable;
-      const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
-      const dayLabels = { MONDAY:'Mon', TUESDAY:'Tue', WEDNESDAY:'Wed', THURSDAY:'Thu', FRIDAY:'Fri', SATURDAY:'Sat' };
-
-      if (data.totalEntries === 0) {
-        grid.innerHTML = `
+        if (data.totalEntries === 0) {
+          grid.innerHTML = `
           <div style="padding:64px;text-align:center;color:var(--ink-light)">
             <div style="font-size:32px;margin-bottom:12px">📋</div>
             <p>No timetable generated for Division ${division} yet.</p>
             <p style="margin-top:8px;font-size:13px">Go to Generate and run the algorithm first.</p>
           </div>`;
-        return;
-      }
+          return;
+        }
 
-      grid.innerHTML = `<div class="tt-grid">${
-        days.map(day => {
+        grid.innerHTML = `<div class="tt-grid">${days.map(day => {
           const entries = tt[day] || [];
           return `
           <div class="tt-day">
             <div class="tt-day-label">${dayLabels[day]}</div>
             <div class="tt-slots">
               ${entries.length === 0
-                ? `<div class="empty-day">No classes</div>`
-                : entries.map((e, i) => `
-                  <div class="tt-slot ${e.isLab ? 'lab-slot' : ''}" style="animation-delay:${i*0.04}s">
+              ? `<div class="empty-day">No classes</div>`
+              : entries.map((e, i) => `
+                  <div class="tt-slot ${e.isLab ? 'lab-slot' : ''}" style="animation-delay:${i * 0.04}s">
                     <div class="slot-time">${e.startTime} – ${e.endTime}</div>
                     <div class="slot-subject">${e.subjectName}</div>
                     <div class="slot-code">${e.subjectCode}${e.isLab ? ' · Lab' : ''}</div>
                     <div class="slot-meta">${e.teacherName}</div>
                     <div class="slot-meta">Room ${e.roomNumber}</div>
                   </div>`).join('')
-              }
+            }
               ${entries.length > 0 ? `<div class="lunch-indicator">🍽 Lunch 1–2 PM</div>` : ''}
             </div>
           </div>`;
         }).join('')
-      }</div>`;
+          }</div>`;
 
-    } catch(e) {
-      grid.innerHTML = `<div style="padding:32px;color:var(--accent)">Failed to load. Is the backend running?</div>`;
+      } catch (e) {
+        grid.innerHTML = `<div style="padding:32px;color:var(--accent)">Failed to load. Is the backend running?</div>`;
+      }
     }
-  }
 
-  // Init home stats on load
-  loadStats();
-</script>
+    // Init home stats on load
+    loadStats();
+  </script>
 </body>
+
 </html>

@@ -2,7 +2,8 @@ services:
   - type: web
     name: kronos
     env: java
+    region: oregon
     plan: free
+    branch: main
     buildCommand: mvn clean package -DskipTests
     startCommand: java -jar target/timetable-1.0.0.jar
- 
