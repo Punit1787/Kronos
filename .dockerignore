@@ -1,0 +1,10 @@
+target/
+data/
+frontend/
+.git/
+.vscode/
+*.log
+*.db
+.DS_Store
+lombok.jar
+run_output.log
