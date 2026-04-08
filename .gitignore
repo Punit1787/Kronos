@@ -5,3 +5,4 @@ data/
 frontend/
 lombok.jar
 *.db
+.DS_Store
